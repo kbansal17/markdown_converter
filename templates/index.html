@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Converter</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-code"></i> Markdown Converter</h1>
+            <p class="tagline">Transform your markdown into beautiful HTML</p>
+        </header>
+
+        <div class="main-content">
+            <div class="editor-container">
+                <form method="post" id="converter-form">
+                    <div class="editor-header">
+                        <h2><i class="fas fa-edit"></i> Markdown</h2>
+                        <div class="editor-controls">
+                            <button type="button" id="clear-btn" class="control-btn">
+                                <i class="fas fa-trash-alt"></i> Clear
+                            </button>
+                            <button type="button" id="sample-btn" class="control-btn">
+                                <i class="fas fa-file-alt"></i> Sample
+                            </button>
+                        </div>
+                    </div>
+                    <textarea name="markdown" id="markdown-input" placeholder="Enter Markdown here...">{{ raw_markdown }}</textarea>
+                    <button type="submit" class="convert-btn">
+                        <i class="fas fa-sync-alt"></i> Convert
+                    </button>
+                </form>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-header">
+                    <h2><i class="fas fa-eye"></i> HTML Preview</h2>
+                    <div class="preview-controls">
+                        <button type="button" id="copy-html-btn" class="control-btn">
+                            <i class="fas fa-copy"></i> Copy HTML
+                        </button>
+                    </div>
+                </div>
+                <div id="preview" class="output-content">
+                    {% if html_output %}
+                        {{ html_output | safe }}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-file-code"></i>
+                            <p>Your HTML preview will appear here</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built by Khushi Bansal<i class="fas fa-heart"></i> </p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
